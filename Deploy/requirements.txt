@@ -1,0 +1,7 @@
+flask
+werkzeug
+tensorflow
+opencv-python
+numpy
+imageio
+tf-keras
