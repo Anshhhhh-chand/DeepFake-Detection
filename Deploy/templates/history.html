@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block title %}Previous Checks{% endblock %}
+{% block content %}
+<section class="history-page">
+  <h1>Previous Checks</h1>
+  {% if checks %}
+    <ul class="history-full">
+      {% for item in checks %}
+        <li>
+          <div class="history-meta">
+            <span class="history-tag {{ item.prediction|lower }}">{{ item.prediction }}</span>
+            <strong>{{ item.original_filename }}</strong>
+            <p class="history-confidence">{{ item.confidence_percent }} • {{ item.confidence_descriptor }}</p>
+            <time>{{ item.timestamp }}</time>
+          </div>
+          <div class="history-actions">
+            <a class="link-arrow" href="{{ item.video_url }}" target="_blank" rel="noopener">View uploaded clip</a>
+          </div>
+        </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p>You have not saved any analyses yet. Run a detection to populate your history.</p>
+  {% endif %}
+</section>
+{% endblock %}
+

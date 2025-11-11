@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+{% block title %}Stay Safe from Deepfakes{% endblock %}
+{% block content %}
+<section class="hero hero-split">
+  <div class="hero-content">
+    <p class="eyebrow">Stay ahead of synthetic media</p>
+    <h1>Trust what you watch before you share it.</h1>
+    <p class="lede">DeepFake Shield inspects facial cues, motion consistency, and texture artifacts so you can confirm whether a clip is real in under a minute.</p>
+    <div class="hero-actions">
+      <a class="cta-button" href="{{ url_for('detect') }}">Start a Detection</a>
+      <a class="ghost-button" href="{{ url_for('history') }}">Review Previous Checks</a>
+    </div>
+    <ul class="hero-points">
+      <li>Edge AI model focused on facial artifacts</li>
+      <li>Secure processing that respects your privacy</li>
+      
+    </ul>
+  </div>
+
+  <div class="hero-visual">
+    <div class="stat-card">
+      <span class="stat-label">Avg. frames scanned</span>
+      <h2>20 key frames</h2>
+      <p>Balanced for accuracy and speed to surface manipulations quickly.</p>
+    </div>
+    <div class="stat-card">
+      <span class="stat-label">Verdict confidence</span>
+      <h2>Binary outcome</h2>
+      <p>Clear REAL or FAKE results, backed by per-frame feature extraction.</p>
+    </div>
+  </div>
+</section>
+
+<section class="pillar-section">
+  <h2>Why DeepFake Shield?</h2>
+  <div class="pillar-grid">
+    <article>
+      <p class="eyebrow">01 · Protect trust</p>
+      <h3>Spot harmful fabrications</h3>
+      <p>Deepfakes can sway opinion, defraud communities, or damage reputations. A quick scan gives you the confidence to challenge misinformation.</p>
+    </article>
+    <article>
+      <p class="eyebrow">02 · Fast evaluation</p>
+      <h3>Analyze in seconds</h3>
+      <p>We sample the most informative frames and apply a trained Inception model to highlight synthetic inconsistencies—no manual review needed.</p>
+    </article>
+    <article>
+      <p class="eyebrow">03 · Private by design</p>
+      <h3>Your data stays local</h3>
+      <p>Video analysis happens inside your environment, keeping sensitive footage out of third-party services.</p>
+    </article>
+  </div>
+</section>
+
+<section class="steps-section">
+  <h2>How to verify a clip</h2>
+  <ol class="steps-list">
+    <li>
+      <span class="step-index">1</span>
+      <div>
+        <h3>Upload the video</h3>
+        <p>Select MP4 or MOV files up to 16 MB directly from your device.</p>
+      </div>
+    </li>
+    <li>
+      <span class="step-index">2</span>
+      <div>
+        <h3>Let the model inspect frames</h3>
+        <p>We evaluate facial regions, lighting, and motion smoothness across 20 representative frames.</p>
+      </div>
+    </li>
+    <li>
+      <span class="step-index">3</span>
+      <div>
+        <h3>Review the verdict</h3>
+        <p>Receive a clear REAL or FAKE outcome with playback so you can see what the model evaluated.</p>
+      </div>
+    </li>
+  </ol>
+</section>
+
+{% endblock %}
+

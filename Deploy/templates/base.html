@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}DeepFake Analyzer{% endblock %}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/app.css') }}">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header class="site-header">
+    <div class="brand">
+      <span class="brand-icon">🛡️</span>
+      <span class="brand-name">DeepFake Shield</span>
+    </div>
+    <nav class="site-nav">
+      <a href="{{ url_for('home') }}" class="{{ 'active' if request.endpoint == 'home' else '' }}">Home</a>
+      <a href="{{ url_for('detect') }}" class="{{ 'active' if request.endpoint == 'detect' else '' }}">Detect</a>
+      <a href="{{ url_for('history') }}" class="{{ 'active' if request.endpoint == 'history' else '' }}">Previous Checks</a>
+    </nav>
+    <div class="auth-nav">
+      {% if session.get('user_id') %}
+        <span class="user-pill">{{ session.get('user_email') }}</span>
+        <a class="auth-link" href="{{ url_for('logout') }}">Log out</a>
+      {% else %}
+        <a class="auth-link" href="{{ url_for('login') }}">Log in</a>
+        <a class="auth-button" href="{{ url_for('signup') }}">Sign up</a>
+      {% endif %}
+    </div>
+  </header>
+
+  {% with messages = get_flashed_messages() %}
+    {% if messages %}
+      <div class="flash-container">
+        {% for message in messages %}
+          <p>{{ message }}</p>
+        {% endfor %}
+      </div>
+    {% endif %}
+  {% endwith %}
+
+  <main class="page-container">
+    {% block content %}{% endblock %}
+  </main>
+
+  <footer class="site-footer">
+    <p>Stay skeptical. Verify before you trust.</p>
+  </footer>
+</body>
+</html>
+

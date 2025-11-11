@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% block title %}Detect Deepfakes{% endblock %}
+{% block content %}
+<section class="detect-layout">
+  <div class="detect-panel">
+    <header class="panel-header">
+      <p class="eyebrow">Upload & verify</p>
+      <h1>Analyze a Video</h1>
+      <p class="lede">Upload a clip (MP4 recommended). We’ll inspect up to 20 key frames for deepfake signals and return a verdict in seconds.</p>
+    </header>
+
+    {% if not is_authenticated %}
+    <div class="auth-callout">
+      <p><strong>Tip:</strong> <a href="{{ url_for('login', next=url_for('detect')) }}">Log in</a> or <a href="{{ url_for('signup', next=url_for('detect')) }}">create an account</a> to save your analyses and review them later.</p>
+    </div>
+    {% endif %}
+
+    <form class="upload-form" action="{{ url_for('detect') }}" method="post" enctype="multipart/form-data">
+      <label for="file">Select a video</label>
+      <input id="file" type="file" name="file" accept="video/*" required>
+      <button type="submit">Run Analysis</button>
+    </form>
+
+    {% if result %}
+      <section class="result-card">
+        <div class="result-header {{ result.prediction|lower }}">
+          <div class="result-title">
+            <span class="result-label">{{ result.prediction }}</span>
+            <span class="result-confidence-chip">{{ result.confidence_percent }} confidence</span>
+          </div>
+          <span class="result-subtitle">Model verdict</span>
+        </div>
+        <div class="result-body">
+          <h2 title="{{ result.original_filename }}">{{ result.original_filename }}</h2>
+          <p class="result-meta">
+            Checked on {{ result.timestamp }} ·
+            <span class="result-confidence">{{ result.confidence_descriptor }}</span>
+          </p>
+          <video controls src="{{ result.video_url }}"></video>
+        </div>
+      </section>
+    {% else %}
+      <section class="result-placeholder">
+        <h2>Your analysis will appear here</h2>
+        <p>Once you upload a clip, we’ll display the verdict, timestamp, and playback below.</p>
+      </section>
+    {% endif %}
+
+    <footer class="panel-footer">
+      <p>Looking for past verdicts? Visit the <a href="{{ url_for('history') }}">Previous Checks</a> page for your browsing session.</p>
+    </footer>
+  </div>
+</section>
+{% endblock %}
+

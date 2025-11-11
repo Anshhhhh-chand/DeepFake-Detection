@@ -5,3 +5,4 @@ opencv-python
 numpy
 imageio
 tf-keras
+pymongo[srv]

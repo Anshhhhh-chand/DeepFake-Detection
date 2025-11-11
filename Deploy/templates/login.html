@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block title %}Sign In{% endblock %}
+{% block content %}
+<section class="auth-page">
+  <div class="auth-card">
+    <h1>Welcome back</h1>
+    <p class="auth-subtitle">Log in to save detections and revisit your history.</p>
+    <form class="auth-form" method="post" action="{{ url_for('login') }}">
+      <input type="hidden" name="next" value="{{ next_target or '' }}">
+      <label for="email">Email</label>
+      <input id="email" type="email" name="email" required autofocus>
+
+      <label for="password">Password</label>
+      <input id="password" type="password" name="password" required>
+
+      <button type="submit">Log In</button>
+    </form>
+    <p class="auth-footer">Need an account? <a href="{{ url_for('signup', next=next_target or url_for('detect')) }}">Create one here</a>.</p>
+  </div>
+</section>
+{% endblock %}
+
